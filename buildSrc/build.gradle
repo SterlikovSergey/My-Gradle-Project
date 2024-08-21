@@ -1,0 +1,29 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+gradlePlugin {
+    plugins {
+        myJacocoPlugin {
+            id = "jacoco"
+            implementationClass = "MyJacocoPlugin"
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'by.st'
+            artifactId = 'my-jacoco-plugin'
+            version = '1.0.0'
+        }
+    }
+    repositories {
+        maven {
+            url = uri("${buildDir}/repo")
+        }
+    }
+}
